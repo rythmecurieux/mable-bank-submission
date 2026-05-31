@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+ruby '>= 3.3'
+
+gem 'bigdecimal'
+gem 'csv'
+gem 'rake', '~> 13.2'
+
+group :development, :test do
+  gem 'rspec', '~> 3.13'
+  gem 'rubocop', '~> 1.69'
+  gem 'rubocop-rspec', '~> 3.3'
+  gem 'simplecov', '~> 0.22'
+end

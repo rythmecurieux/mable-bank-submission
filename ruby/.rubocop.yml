@@ -1,0 +1,55 @@
+plugins:
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'coverage/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'Rakefile'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 22
+  Exclude:
+    - 'spec/domain/company_account_book_properties_spec.rb'
+
+Layout/LineLength:
+  Max: 120
+
+Layout/EndOfLine:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 8
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/architecture/**/*'
+    - 'spec/application/idempotency_and_journal_spec.rb'
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false

@@ -1,0 +1,49 @@
+{
+  "name": "mable-bank-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional TypeScript/Node.js reference implementation for Mable Bank",
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./cli": {
+      "types": "./dist/src/cli.d.ts",
+      "import": "./dist/src/cli.js"
+    }
+  },
+  "bin": {
+    "mable-bank": "./dist/bin/mable-bank.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "tsx bin/mable-bank.ts",
+    "demo": "tsx bin/mable-bank.ts test/fixtures/mable_account_balances.csv test/fixtures/mable_transactions.csv",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run build && npm run coverage && npm run demo",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/node": "^22.13.10",
+    "@vitest/coverage-v8": "^3.0.9",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.1.1",
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "vitest": "^3.0.9"
+  }
+}

@@ -1,0 +1,5 @@
+root = false
+
+[*.cs]
+# Sealed domain exceptions are constructed with explicit messages only.
+dotnet_diagnostic.CA1032.severity = none

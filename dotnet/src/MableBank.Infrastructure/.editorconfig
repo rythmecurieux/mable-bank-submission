@@ -1,0 +1,5 @@
+root = false
+
+[*.cs]
+# IAsyncEnumerable CSV readers use ConfigureAwait in consumers; iterator disposal is synchronous-open.
+dotnet_diagnostic.CA2007.severity = none
