@@ -2,6 +2,8 @@
 
 Principal engineer submission: Mable Bank transfer-processing challenge.
 
+This page gives context on background, scope, and intent. The code and tests are the primary evidence. This documentation explains why the repo is structured the way it is and what it is not trying to be.
+
 ## How this was developed
 
 Work proceeded **domain-first**, then one implementation at a time in the IDE used day to day for that stack:

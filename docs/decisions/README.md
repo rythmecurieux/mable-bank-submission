@@ -1,6 +1,8 @@
 # Architecture decision records
 
-Why the system is shaped this way. Read in order:
+These records explain why the system is shaped this way. Each ADR captures a decision, the reasoning behind it, and what was rejected. They are short on purpose: they show how scope was managed, not how every production concern would be solved.
+
+Read in order:
 
 1. [001: No database or event sourcing](001-no-database-or-event-sourcing.md)
 2. [002: CompanyAccountBook aggregate](002-company-account-book-aggregate.md)

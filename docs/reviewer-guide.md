@@ -2,6 +2,8 @@
 
 Fast verification for the Mable Bank submission. Allow **~2–5 minutes per stack**.
 
+This guide is the practical entry point: commands to run each stack, expected output, and how to try your own CSV files. Read [How the solution works](README.md#how-the-solution-works) first if you want the reasoning behind the design. Come here when you are ready to run code.
+
 **Context:** [How this was built](README.md#how-this-was-built) · [Author profile](author-profile.md) · **Review order:** [`dotnet/`](../dotnet/) → [`nodejs-typescript/`](../nodejs-typescript/) → [`ruby/`](../ruby/) (RSpec rubric).
 
 ## Terminal commands (local SDK)

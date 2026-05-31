@@ -2,11 +2,13 @@
 
 Backend coding challenge: load company account balances from CSV, apply a day’s transfers, enforce non-negative balances.
 
+This repo is a principal engineer submission for the Mable Bank take-home. It implements one transfer-processing model in three runtimes so reviewers can check behaviour quickly in their preferred stack. The documentation explains what the program does, why it is structured this way, and what was deliberately left out of scope.
+
 **Documentation:** [docs/README.md](docs/README.md) → [How the solution works](docs/README.md#how-the-solution-works) → [How this was built](docs/README.md#how-this-was-built) → [Reviewer guide](docs/reviewer-guide.md) → [Author profile](docs/author-profile.md).
 
 ## What went into this repo
 
-One **domain model** implemented three times for different review paths, not three products:
+One **domain model** implemented three times for different review paths, not three products. In production you would ship one stack per feature. Here, three folders exist so the take-home, RSpec rubric, and portability proof can each be reviewed without re-reading the same logic in an unfamiliar language.
 
 | Order | Folder | Why it exists | IDE (author) | Run the solution |
 | --- | --- | --- | --- | --- |
