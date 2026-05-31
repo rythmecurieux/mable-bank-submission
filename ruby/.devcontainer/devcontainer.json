@@ -1,9 +1,11 @@
 {
   "name": "Mable Bank Ruby",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolder}/..,target=/workspaces/repo-root,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/repo-root/ruby",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -15,6 +17,10 @@
       }
     }
   },
-  "postCreateCommand": "bundle install",
+  "remoteEnv": {
+    "BUNDLE_PATH": "/home/vscode/.gem-bundle",
+    "BUNDLE_IGNORE_CONFIG": "1"
+  },
+  "postCreateCommand": "bundle check || bundle install",
   "remoteUser": "vscode"
 }

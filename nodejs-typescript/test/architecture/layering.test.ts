@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DomainError, InvalidMoneyError, InvariantViolationError } from '../../src/domain/errors.js';
 
 const srcRoot = join(fileURLToPath(new URL('../../src', import.meta.url)));
 
@@ -42,5 +43,18 @@ describe('Architecture layering', () => {
       return importsForbidden(content, /from ['"].*\/infrastructure\//);
     });
     expect(violations).toEqual([]);
+  });
+
+  it('infrastructure does not import cli', () => {
+    const violations = filesUnder('infrastructure').filter((path) => {
+      const content = readFileSync(path, 'utf8');
+      return importsForbidden(content, /from ['"].*\/cli(\.js|\/)/);
+    });
+    expect(violations).toEqual([]);
+  });
+
+  it('domain errors extend DomainError', () => {
+    expect(InvalidMoneyError.prototype).toBeInstanceOf(DomainError);
+    expect(InvariantViolationError.prototype).toBeInstanceOf(DomainError);
   });
 });

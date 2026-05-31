@@ -1,9 +1,17 @@
-import type { LogPayload, Logger } from './Logger.js';
+import type { Logger } from './Logger.js';
+import type {
+  TransferProcessedLogEntry,
+  TransferProcessedTelemetry,
+} from './telemetry/TransferProcessedTelemetry.js';
 
 export class RecordingLogger implements Logger {
-  readonly entries: LogPayload[] = [];
+  readonly entries: TransferProcessedTelemetry[] = [];
+  readonly wireEntries: TransferProcessedLogEntry[] = [];
 
-  info(payload: LogPayload): void {
-    this.entries.push(payload);
+  logTransferProcessed(telemetry: TransferProcessedTelemetry): void {
+    this.entries.push(telemetry);
+    this.wireEntries.push(telemetry.toLogEntry());
   }
 }
+
+export type { TransferProcessedLogEntry };

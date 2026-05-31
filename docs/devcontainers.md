@@ -9,10 +9,31 @@ How to run and develop each Mable Bank implementation inside a Dev Container, wi
 | Folder | Language | Container includes | After first open |
 | --- | --- | --- | --- |
 | `dotnet/` | C# / .NET 9 | SDK, test tools | `dotnet restore` |
-| `nodejs-typescript/` | TypeScript / Node 22 | npm, Vitest, ESLint | `npm ci` |
-| `ruby/` | Ruby 3.3 | Bundler, RSpec, RuboCop | `bundle install` |
+| `nodejs-typescript/` | TypeScript / Node 22 | npm, Vitest, ESLint (deps pre-installed in image) | `npm ci` if lockfile changed |
+| `ruby/` | Ruby 3.3 | Bundler, RSpec, RuboCop (pre-installed in image) | `bundle check` (fast) |
 
 Each folder is **self-contained**. Pick the stack you want to review or change. You do not need to open the whole repo at once.
+
+## How long setup takes
+
+| Step | First time | Later opens |
+| --- | --- | --- |
+| Pull base Docker image | 5–15 min | Skipped (cached) |
+| Build Dev Container image | 3–10 min | ~30 s if Dockerfile unchanged |
+| RubyMine / JetBrains backend | 2–5 min | 1–3 min |
+| `bundle install` / `npm ci` / `dotnet restore` | 1–3 min | Seconds (`bundle check`, cached layers) |
+
+**First open** on Windows with RubyMine is often **15–25 minutes** total. That is normal.
+
+**Later opens** of the same container should be **under a minute** if you do not rebuild.
+
+To avoid waiting:
+
+- **Do not rebuild** unless the Dockerfile or `Gemfile.lock` changed.
+- When closing RubyMine, choose **keep the Dev Container running** if offered.
+- For a quick verify only, skip the IDE: `./script/test-devcontainer.ps1` in `ruby/` (~5–10 min first time, faster after image cache).
+
+The Ruby image now installs gems at **build time** (not from the bind-mounted folder), so reopening the project does not re-download RuboCop and RSpec every time.
 
 ## The one rule that catches most people
 
@@ -168,6 +189,44 @@ docker: Error response from daemon: the working directory 'C:/Program Files/Git/
 ### TypeScript: Node version errors locally
 
 The TypeScript stack requires **Node 22+**. If your host Node is older, use the Dev Container. Node 22 is already inside the image.
+
+### TypeScript: `fatal: not a git repository` / Cannot create Dev Container
+
+Same root cause as Ruby: opening **`nodejs-typescript/`** alone hides `.git` at the repo root. Rebuild the Dev Container so the parent repo mounts at `/workspaces/repo-root` and the workspace is `/workspaces/repo-root/nodejs-typescript`.
+
+### Ruby: `fatal: not a git repository` / Cannot create Dev Container
+
+**Symptom:** RubyMine shows `Failed to execute /usr/local/bin/git: fatal: not a git repository (or any parent up to mount point /workspaces)` during **Preparing environment** or **Uploading worker binary**, then **Cannot create Dev Container**. `bundle install` may still run in the background.
+
+**Cause:** You opened the **`ruby/`** folder. The `.git` directory lives in the **repo root** (`mabel-bank-submission/`), one level up. JetBrains Dev Containers mount only the opened folder by default, so Git is missing inside the container.
+
+**Fix (rebuild):** Rebuild the Dev Container. The updated `devcontainer.json` mounts the parent repo at `/workspaces/repo-root` and sets the workspace to `/workspaces/repo-root/ruby`, so Git works.
+
+**Workaround (no IDE):** From PowerShell in `ruby/`:
+
+```powershell
+./script/test-devcontainer.ps1
+```
+
+**Workaround (JetBrains):** On the welcome screen, use **Create Dev Container and Clone Sources** from a Git remote instead of **Mount Sources**, so the full repo (including `.git`) is inside the container.
+
+### Ruby: Bundler permission error on `/usr/local/rvm/gems`
+
+**Symptom:** `Bundler::PermissionError` writing to `/usr/local/rvm/gems/default/cache/...` during `postCreateCommand` or `bundle install`.
+
+**Cause:** The Dev Container runs as user `vscode`, but RVM gem directories in the base image are owned by root.
+
+**Fix (inside the container terminal):**
+
+```bash
+cd /workspaces/ruby   # or your mounted ruby folder
+bundle config set --local path vendor/bundle
+bundle install
+```
+
+Then run `./demo.sh`.
+
+**Fix (rebuild):** Rebuild the Dev Container from the RubyMine welcome screen so the updated Dockerfile and `.bundle/config` apply. See [Rebuild the container](#if-the-container-fails-to-start) above.
 
 ### Ruby: bundler / gem errors on the host
 

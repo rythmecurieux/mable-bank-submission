@@ -7,12 +7,12 @@ export type TransferFailureReason =
 
 export type TransferSkipReason = 'already_processed';
 
-const REASON_MESSAGES: Record<TransferFailureReason | TransferSkipReason, string> = {
+const REASON_MESSAGES = {
   source_not_found: 'Source account not found',
   destination_not_found: 'Destination account not found',
   insufficient_funds: 'Insufficient funds',
   already_processed: 'Transfer already processed',
-};
+} as const satisfies Record<TransferFailureReason | TransferSkipReason, string>;
 
 export type TransferResult =
   | {
@@ -78,8 +78,8 @@ export function isTransferSkipped(
   return result.status === 'skipped';
 }
 
-export function transferReasonCode(result: TransferResult): string | undefined {
+export function transferReasonCode(result: TransferResult): string | null {
   if (isTransferFailure(result)) return result.reason;
   if (isTransferSkipped(result)) return result.reason;
-  return undefined;
+  return null;
 }

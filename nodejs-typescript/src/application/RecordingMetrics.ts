@@ -1,14 +1,17 @@
-import type { MetricTags, Metrics } from './Metrics.js';
-
-export type RecordedIncrement = {
-  readonly name: string;
-  readonly tags: MetricTags;
-};
+import type { Metrics } from './Metrics.js';
+import type {
+  MetricIncrement,
+  TransferProcessedTelemetry,
+} from './telemetry/TransferProcessedTelemetry.js';
 
 export class RecordingMetrics implements Metrics {
-  readonly increments: RecordedIncrement[] = [];
+  readonly records: TransferProcessedTelemetry[] = [];
+  readonly increments: MetricIncrement[] = [];
 
-  increment(name: string, tags: MetricTags = {}): void {
-    this.increments.push({ name, tags });
+  recordTransferProcessed(telemetry: TransferProcessedTelemetry): void {
+    this.records.push(telemetry);
+    this.increments.push(telemetry.toMetricIncrement());
   }
 }
+
+export type { MetricIncrement };

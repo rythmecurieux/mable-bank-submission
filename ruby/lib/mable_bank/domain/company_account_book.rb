@@ -3,13 +3,16 @@
 module MableBank
   module Domain
     class CompanyAccountBook
-      attr_writer :ledger
-
       def initialize(accounts = [])
         @accounts = {}
         @ledger = nil
 
         accounts.each { |account| add_account(account) }
+      end
+
+      def use_ledger(ledger)
+        @ledger = ledger
+        self
       end
 
       def add_account(account)
@@ -60,12 +63,12 @@ module MableBank
 
       def evaluate(instruction)
         source = @accounts[instruction.from_account_number]
-        return :source_not_found unless source
+        return TransferFailureReason::SOURCE_NOT_FOUND unless source
 
         destination = @accounts[instruction.to_account_number]
-        return :destination_not_found unless destination
+        return TransferFailureReason::DESTINATION_NOT_FOUND unless destination
 
-        return :insufficient_funds unless source.can_debit?(instruction.amount)
+        return TransferFailureReason::INSUFFICIENT_FUNDS unless source.can_debit?(instruction.amount)
 
         nil
       end
@@ -73,6 +76,8 @@ module MableBank
       def apply(instruction)
         source = @accounts[instruction.from_account_number]
         destination = @accounts[instruction.to_account_number]
+
+        raise InvariantViolationError, 'apply called without successful evaluation' unless source && destination
 
         source.debit!(instruction.amount)
         destination.credit(instruction.amount)
@@ -87,7 +92,7 @@ module MableBank
       end
 
       def copy_account(account)
-        account.class.new(account_number: account.account_number, balance: account.balance)
+        account.copy
       end
 
       def snapshot_for(account)

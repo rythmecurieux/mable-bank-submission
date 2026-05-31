@@ -1,7 +1,7 @@
 import type { Logger } from './Logger.js';
 
 export class NullLogger implements Logger {
-  info(): void {
+  logTransferProcessed(): void {
     return undefined;
   }
 }

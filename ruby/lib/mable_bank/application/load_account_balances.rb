@@ -10,8 +10,7 @@ module MableBank
       def call
         book = Domain::CompanyAccountBook.new
         stream_accounts { |account| book.add_account(account) }
-        book.ledger = RollingBackLedger.new(book)
-        book
+        book.use_ledger(RollingBackLedger.new(book))
       end
 
       private

@@ -1,4 +1,5 @@
 import { readFileSync, existsSync } from 'node:fs';
+import { CsvParseError } from './errors.js';
 
 /**
  * RFC 4180-style CSV parse for bounded batch files (ADR-004).
@@ -60,12 +61,12 @@ export function readCsvRows(path: string): string[][] {
 
 export function readCsvRecords(path: string): { headers: string[]; rows: string[][] } {
   if (!existsSync(path)) {
-    throw new Error(`ENOENT:${path}`);
+    throw new CsvParseError(`Account balances file not found: ${path}`);
   }
   const rows = readCsvRows(path);
   const headerRow = rows[0];
   if (!headerRow) {
-    throw new Error(`CSV file is empty: ${path}`);
+    throw new CsvParseError(`CSV file is empty: ${path}`);
   }
   return {
     headers: headerRow,
@@ -80,7 +81,7 @@ export function rowNumber(index: number): number {
 export function columnIndex(headers: string[], name: string): number {
   const index = headers.findIndex((header) => header.trim().toLowerCase() === name.toLowerCase());
   if (index < 0) {
-    throw new Error(`Missing required column: ${name}`);
+    throw new CsvParseError(`Missing required column: ${name}`);
   }
   return index;
 }

@@ -47,6 +47,11 @@ RSpec/DescribeClass:
   Exclude:
     - 'spec/architecture/**/*'
     - 'spec/application/idempotency_and_journal_spec.rb'
+    - 'spec/cli_integration_spec.rb'
+
+RSpec/DescribeMethod:
+  Exclude:
+    - 'spec/cli_integration_spec.rb'
 
 RSpec/LeadingSubject:
   Enabled: false

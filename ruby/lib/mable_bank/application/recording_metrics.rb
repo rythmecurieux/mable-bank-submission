@@ -3,14 +3,18 @@
 module MableBank
   module Application
     class RecordingMetrics
-      attr_reader :increments
+      include MetricsPort
+
+      attr_reader :records, :increments
 
       def initialize
+        @records = []
         @increments = []
       end
 
-      def increment(name, **tags)
-        @increments << { name: name, tags: tags }
+      def record_transfer_processed(telemetry)
+        @records << telemetry
+        @increments << telemetry.to_metric_increment
       end
     end
   end

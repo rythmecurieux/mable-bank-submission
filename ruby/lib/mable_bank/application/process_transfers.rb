@@ -45,13 +45,7 @@ module MableBank
       def journal_record(result)
         return unless @transfer_journal && @run_id
 
-        outcome = if result.success?
-                    'succeeded'
-                  elsif result.skipped?
-                    'skipped'
-                  else
-                    'failed'
-                  end
+        outcome = TransferOutcome.wire_name(result)
         @transfer_journal.record(
           TransferJournalEntry.new(
             run_id: @run_id,

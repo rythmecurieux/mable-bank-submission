@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadAccountBalances } from '../../src/application/LoadAccountBalances.js';
+import { LoadAccountBalancesError, loadAccountBalances } from '../../src/application/LoadAccountBalances.js';
 import { Account } from '../../src/domain/Account.js';
 import { AccountNumber } from '../../src/domain/AccountNumber.js';
 import { DuplicateAccountError } from '../../src/domain/errors.js';
@@ -20,16 +20,8 @@ describe('LoadAccountBalances', () => {
     );
   });
 
-  it('supports readers that only implement read()', () => {
-    const reader = {
-      read: () => [
-        new Account(AccountNumber.parse('1111234522226789'), Money.fromDecimalString('10.00')),
-      ],
-    };
-    const book = loadAccountBalances(reader);
-    expect(book.balanceFor(AccountNumber.parse('1111234522226789'))?.balance.format()).toBe(
-      '10.00',
-    );
+  it('rejects readers that do not implement eachAccount', () => {
+    expect(() => loadAccountBalances({} as never)).toThrow(LoadAccountBalancesError);
   });
 
   it('rejects duplicate accounts while streaming', () => {

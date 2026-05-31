@@ -5,13 +5,14 @@ module MableBank
     class Account
       attr_reader :account_number, :balance
 
-      def initialize(account_number:, balance:)
+      def initialize(account_number:, balance:, credit_policy: DefaultCreditPolicy.new)
         @account_number = account_number
         @balance = balance
+        @credit_policy = credit_policy
       end
 
       def credit(amount)
-        @balance = balance + amount
+        @balance = @credit_policy.apply_credit(@balance, amount)
       end
 
       def debit!(amount)
@@ -24,7 +25,11 @@ module MableBank
         balance.amount >= amount.amount
       end
 
-      # Used only when a transfer apply must roll back (see Infrastructure::RollingBackLedger).
+      def copy
+        self.class.new(account_number: account_number, balance: balance, credit_policy: @credit_policy)
+      end
+
+      # Used only when a transfer apply must roll back (see Application::RollingBackLedger).
       def replace_balance!(money)
         @balance = money
       end

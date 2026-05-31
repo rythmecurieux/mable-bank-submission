@@ -2,6 +2,7 @@
   "name": "mable-bank-typescript",
   "version": "1.0.0",
   "private": true,
+  "sideEffects": false,
   "description": "Optional TypeScript/Node.js reference implementation for Mable Bank",
   "type": "module",
   "files": ["dist"],

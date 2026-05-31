@@ -5,10 +5,11 @@ import {
   type TransferInstruction,
 } from '../domain/TransferInstruction.js';
 import { TransferId } from '../domain/TransferId.js';
+import type { TransferInstructionReader } from '../application/ports/readers.js';
 import { CsvParseError, csvParseError } from './errors.js';
 import { columnIndex, readCsvRecords, rowNumber } from './csv.js';
 
-export class CsvTransferInstructionReader {
+export class CsvTransferInstructionReader implements TransferInstructionReader {
   constructor(private readonly path: string) {}
 
   eachInstruction(callback: (instruction: TransferInstruction) => void): void {

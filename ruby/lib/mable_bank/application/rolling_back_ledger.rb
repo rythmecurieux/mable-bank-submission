@@ -4,7 +4,7 @@ module MableBank
   module Application
     # Synchronous transactional boundary: on any error during apply, restore pre-transfer balances.
     class RollingBackLedger
-      include Ledger
+      include Domain::Ledger
 
       def initialize(account_book)
         @account_book = account_book

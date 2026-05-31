@@ -1,5 +1,5 @@
-export type LogPayload = Record<string, string | number | boolean | undefined>;
+import type { TransferProcessedTelemetry } from './telemetry/TransferProcessedTelemetry.js';
 
 export interface Logger {
-  info(payload: LogPayload): void;
+  logTransferProcessed(telemetry: TransferProcessedTelemetry): void;
 }

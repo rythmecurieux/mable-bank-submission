@@ -3,7 +3,7 @@
 module MableBank
   module Infrastructure
     class InputFile
-      class ValidationError < StandardError; end
+      class ValidationError < MableBank::Error; end
 
       MAX_BYTES = 10 * 1024 * 1024
 

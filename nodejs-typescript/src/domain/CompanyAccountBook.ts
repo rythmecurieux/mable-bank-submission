@@ -38,8 +38,7 @@ export class CompanyAccountBook {
   }
 
   private copyAccount(account: Account): Account {
-    const AccountClass = account.constructor as typeof Account;
-    return new AccountClass(account.accountNumber, account.getBalance());
+    return account.copy();
   }
 
   transfer(instruction: TransferInstruction): TransferResult {

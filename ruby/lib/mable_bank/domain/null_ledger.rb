@@ -3,6 +3,8 @@
 module MableBank
   module Domain
     class NullLedger
+      include Ledger
+
       def atomic
         yield
       end

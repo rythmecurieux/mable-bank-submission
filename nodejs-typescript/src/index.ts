@@ -4,11 +4,16 @@ export { ProcessTransfers } from './application/ProcessTransfers.js';
 export { TransferResultRecorder } from './application/TransferResultRecorder.js';
 export { RecordingLogger } from './application/RecordingLogger.js';
 export { RecordingMetrics } from './application/RecordingMetrics.js';
+export { loadAccountBalances } from './application/LoadAccountBalances.js';
+export type {
+  AccountBalanceReader,
+  TransferInstructionReader,
+} from './application/ports/readers.js';
 export { CompanyAccountBook } from './domain/CompanyAccountBook.js';
 export { AccountBalance } from './domain/AccountBalance.js';
 export { Money } from './domain/Money.js';
 export type { Ledger } from './domain/Ledger.js';
 export { verifyReconciliation } from './domain/Reconciliation.js';
-export { formatReport } from './infrastructure/ConsoleReporter.js';
-export { runCli, runProcessingDay, parseCliOptions } from './cli.js';
-export type { CliOptions } from './cli.js';
+export { DomainError } from './domain/errors.js';
+export { DefaultCreditPolicy, type CreditPolicy } from './domain/CreditPolicy.js';
+export { TransferProcessedTelemetry } from './application/telemetry/TransferProcessedTelemetry.js';

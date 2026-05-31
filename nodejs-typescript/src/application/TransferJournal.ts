@@ -5,7 +5,7 @@ export type TransferJournalEntry = {
   readonly runId: string;
   readonly transferId: TransferId;
   readonly outcome: 'succeeded' | 'failed' | 'skipped';
-  readonly reasonCode: string | undefined;
+  readonly reasonCode: string | null;
   readonly instruction: TransferInstruction;
   readonly recordedAt: Date;
 };

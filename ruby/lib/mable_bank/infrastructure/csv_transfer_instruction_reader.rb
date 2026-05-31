@@ -5,7 +5,7 @@ require 'csv'
 module MableBank
   module Infrastructure
     class CsvTransferInstructionReader
-      class ParseError < StandardError; end
+      class ParseError < MableBank::Error; end
 
       def initialize(path)
         @path = path

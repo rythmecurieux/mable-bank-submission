@@ -1,5 +1,5 @@
-export type MetricTags = Record<string, string | undefined>;
+import type { TransferProcessedTelemetry } from './telemetry/TransferProcessedTelemetry.js';
 
 export interface Metrics {
-  increment(name: string, tags?: MetricTags): void;
+  recordTransferProcessed(telemetry: TransferProcessedTelemetry): void;
 }

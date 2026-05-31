@@ -1,21 +1,19 @@
 import { verifyReconciliation } from '../domain/Reconciliation.js';
-import type { TransferInstruction } from '../domain/TransferInstruction.js';
 import type { TransferResult } from '../domain/TransferResult.js';
-import { isTransferSkipped, isTransferSuccess, transferReasonCode } from '../domain/TransferResult.js';
-import { InMemoryIdempotencyRegistry } from './IdempotencyRegistry.js';
+import { TransferProcessedTelemetry } from './telemetry/TransferProcessedTelemetry.js';
+import type { AccountBalanceReader, TransferInstructionReader } from './ports/readers.js';
+import { loadAccountBalances } from './LoadAccountBalances.js';
 import type { Logger } from './Logger.js';
-import { loadAccountBalances, type AccountBalanceReader } from './LoadAccountBalances.js';
 import type { Metrics } from './Metrics.js';
 import { NullLogger } from './NullLogger.js';
 import { NullMetrics } from './NullMetrics.js';
 import { ProcessingReport } from './ProcessingReport.js';
 import { ProcessTransfers, newRunId } from './ProcessTransfers.js';
 import { TransferResultRecorder } from './TransferResultRecorder.js';
+import { InMemoryIdempotencyRegistry } from './IdempotencyRegistry.js';
 import { InMemoryTransferJournal } from './TransferJournal.js';
 
-export type TransferInstructionReader = {
-  eachInstruction(callback: (instruction: TransferInstruction) => void): void;
-};
+export type { AccountBalanceReader, TransferInstructionReader } from './ports/readers.js';
 
 export type ProcessDayOptions = {
   readonly balancesReader: AccountBalanceReader;
@@ -61,20 +59,8 @@ export class ProcessDay {
   }
 
   private observeTransfer(result: TransferResult): void {
-    const outcome = isTransferSuccess(result)
-      ? 'succeeded'
-      : isTransferSkipped(result)
-        ? 'skipped'
-        : 'failed';
-    const reasonCode = transferReasonCode(result);
-    this.metrics.increment('transfer.processed', { outcome, reason: reasonCode });
-    this.logger.info({
-      event: 'transfer.processed',
-      outcome,
-      reasonCode,
-      transferId: result.instruction.transferId.toString(),
-      from: result.instruction.fromAccountNumber.toString(),
-      to: result.instruction.toAccountNumber.toString(),
-    });
+    const telemetry = TransferProcessedTelemetry.fromResult(result);
+    this.metrics.recordTransferProcessed(telemetry);
+    this.logger.logTransferProcessed(telemetry);
   }
 }

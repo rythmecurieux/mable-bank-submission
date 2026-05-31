@@ -4,9 +4,9 @@ module MableBank
   module Domain
     class TransferResult
       REASONS = {
-        source_not_found: 'Source account not found',
-        destination_not_found: 'Destination account not found',
-        insufficient_funds: 'Insufficient funds',
+        TransferFailureReason::SOURCE_NOT_FOUND => 'Source account not found',
+        TransferFailureReason::DESTINATION_NOT_FOUND => 'Destination account not found',
+        TransferFailureReason::INSUFFICIENT_FUNDS => 'Insufficient funds',
         already_processed: 'Transfer already processed'
       }.freeze
 

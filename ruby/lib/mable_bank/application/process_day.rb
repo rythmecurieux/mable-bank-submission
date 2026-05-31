@@ -54,22 +54,9 @@ module MableBank
       end
 
       def observe_transfer(result)
-        outcome = if result.success?
-                    'succeeded'
-                  elsif result.skipped?
-                    'skipped'
-                  else
-                    'failed'
-                  end
-        @metrics.increment('transfer.processed', outcome: outcome, reason: result.reason_code)
-        @logger.info(
-          event: 'transfer.processed',
-          outcome: outcome,
-          reason_code: result.reason_code,
-          transfer_id: result.instruction.transfer_id.to_s,
-          from: result.instruction.from_account_number.to_s,
-          to: result.instruction.to_account_number.to_s
-        )
+        telemetry = Telemetry::TransferProcessedTelemetry.from_result(result)
+        @metrics.record_transfer_processed(telemetry)
+        @logger.log_transfer_processed(telemetry)
       end
 
       def each_instruction(&)

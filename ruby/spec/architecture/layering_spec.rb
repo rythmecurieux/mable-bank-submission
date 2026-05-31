@@ -23,4 +23,10 @@ RSpec.describe 'Architecture layering' do
     end
     expect(violations).to be_empty, "violations: #{violations.join(', ')}"
   end
+
+  it 'domain errors inherit from DomainError and MableBank::Error' do
+    expect(MableBank::Domain::DomainError).to be < MableBank::Error
+    expect(MableBank::Domain::InvalidAccountNumberError).to be < MableBank::Domain::DomainError
+    expect(MableBank::Domain::InvariantViolationError).to be < MableBank::Domain::DomainError
+  end
 end

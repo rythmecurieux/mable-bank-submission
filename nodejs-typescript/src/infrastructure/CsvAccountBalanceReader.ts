@@ -1,7 +1,7 @@
 import { Account } from '../domain/Account.js';
 import { AccountNumber } from '../domain/AccountNumber.js';
 import { Money } from '../domain/Money.js';
-import type { AccountBalanceReader } from '../application/LoadAccountBalances.js';
+import type { AccountBalanceReader } from '../application/ports/readers.js';
 import { CsvParseError, csvParseError } from './errors.js';
 import { columnIndex, readCsvRecords, rowNumber } from './csv.js';
 
