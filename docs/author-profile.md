@@ -28,8 +28,8 @@ VS Code can use the same `.devcontainer/` configs: open **`dotnet/`**, **`nodejs
 | Artifact | Role |
 | --- | --- |
 | [`dotnet/`](../dotnet/) + core `docs/` | **Primary deliverable** for a timed take-home (~2–4 hours focused) |
-| [`ruby/`](../ruby/) | **Rubric alignment** — RSpec required by the brief |
-| [`nodejs-typescript/`](../nodejs-typescript/) | **Optional reference** — same model, different runtime |
+| [`ruby/`](../ruby/) | **Rubric alignment**: RSpec required by the brief |
+| [`nodejs-typescript/`](../nodejs-typescript/) | **Optional reference**: same model, different runtime |
 
 Three folders prove **portability of one model**. They are **not** three services to operate in production.
 
@@ -41,8 +41,8 @@ Three folders prove **portability of one model**. They are **not** three service
 | --- | --- |
 | Day-to-day delivery? | **One stack**, smallest correct change, tests at real boundaries. |
 | Why three codebases here? | Take-home + rubric + portability proof for **this submission only**. |
-| Why this much documentation? | Reviewer time-boxing and **explicit non-goals** — not README on every ticket. |
-| What was omitted? | Database, queues, web framework, event sourcing, external services — [ADR 001](decisions/001-no-database-or-event-sourcing.md). |
+| Why this much documentation? | Reviewer time-boxing and **explicit non-goals**, not README on every ticket. |
+| What was omitted? | Database, queues, web framework, event sourcing, external services: [ADR 001](decisions/001-no-database-or-event-sourcing.md). |
 
 ## Professional summary
 
@@ -61,7 +61,7 @@ Three folders prove **portability of one model**. They are **not** three service
 | **2** | [`nodejs-typescript/`](../nodejs-typescript/) | TypeScript reference |
 | **3** | [`ruby/`](../ruby/) | RSpec rubric |
 
-Details: [architecture/polyglot-comparison.md](architecture/polyglot-comparison.md). Recruitment guidance: use your strongest language — review order is **.NET → TypeScript → Ruby**.
+Details: [architecture/polyglot-comparison.md](architecture/polyglot-comparison.md). Recruitment guidance: use your strongest language: review order is **.NET → TypeScript → Ruby**.
 
 ## Language background
 
@@ -94,6 +94,6 @@ Details: [architecture/polyglot-comparison.md](architecture/polyglot-comparison.
 
 ## Read next
 
-1. [Reviewer guide](reviewer-guide.md) — run each stack (~2 min each)
-2. [Documentation index](README.md) — full map
-3. [Challenge rubric](challenge-rubric.md) — RSpec evidence in `ruby/`
+1. [Reviewer guide](reviewer-guide.md): run each stack (~2 min each)
+2. [Documentation index](README.md): full map
+3. [Challenge rubric](challenge-rubric.md): RSpec evidence in `ruby/`

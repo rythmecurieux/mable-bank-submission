@@ -1,4 +1,4 @@
-# Dev Containers — plain-English guide
+# Dev Containers: plain-English guide
 
 How to run and develop each Mable Bank implementation inside a Dev Container, with or without an IDE.
 
@@ -12,7 +12,7 @@ How to run and develop each Mable Bank implementation inside a Dev Container, wi
 | `nodejs-typescript/` | TypeScript / Node 22 | npm, Vitest, ESLint | `npm ci` |
 | `ruby/` | Ruby 3.3 | Bundler, RSpec, RuboCop | `bundle install` |
 
-Each folder is **self-contained**. Pick the stack you want to review or change — you do not need to open the whole repo at once.
+Each folder is **self-contained**. Pick the stack you want to review or change. You do not need to open the whole repo at once.
 
 ## The one rule that catches most people
 
@@ -46,7 +46,7 @@ If the IDE has already started the Dev Container, open a **terminal in the conta
 
 That installs dependencies (if needed), runs tests, builds, and runs the sample CSV through the CLI.
 
-TypeScript only — full CI-style check:
+TypeScript only: full CI-style check:
 
 ```bash
 npm run verify
@@ -62,7 +62,7 @@ From the implementation folder:
 ./script/test-devcontainer.sh
 ```
 
-**Windows PowerShell** (recommended on Windows — no local SDK required):
+**Windows PowerShell** (recommended on Windows: no local SDK required):
 
 ```powershell
 cd dotnet              # or nodejs-typescript / ruby
@@ -88,11 +88,11 @@ Each stack has `script/test-devcontainer.ps1`. On Git Bash / WSL / Linux / macOS
    ./demo.sh
    ```
 
-6. To run the CLI with your own CSV files, see [Reviewer guide — custom CSV](reviewer-guide.md#run-the-cli-with-your-own-csv-files).
+6. To run the CLI with your own CSV files, see [Reviewer guide: custom CSV](reviewer-guide.md#run-the-cli-with-your-own-csv-files).
 
 **Run tests from the UI:** use the Test Explorer (C# / Vitest extensions are preconfigured in `devcontainer.json`).
 
-### JetBrains Rider — .NET (`dotnet/`)
+### JetBrains Rider: .NET (`dotnet/`)
 
 1. Install Docker and the **Dev Containers** plugin (bundled in recent Rider versions).
 2. **File → Open** → select the `dotnet/` folder.
@@ -101,14 +101,14 @@ Each stack has `script/test-devcontainer.ps1`. On Git Bash / WSL / Linux / macOS
 4. After the container is ready, open the terminal and run `./demo.sh`.
 5. Run tests: right-click the test project or use the unit test tool window.
 
-### JetBrains WebStorm — TypeScript (`nodejs-typescript/`)
+### JetBrains WebStorm: TypeScript (`nodejs-typescript/`)
 
 1. **File → Open** → select `nodejs-typescript/`.
 2. Open in Dev Container when prompted.
 3. Terminal: `./demo.sh` or `npm run verify`.
 4. Run tests: npm tool window → `test`, or use the Vitest integration.
 
-### JetBrains RubyMine — Ruby (`ruby/`)
+### JetBrains RubyMine: Ruby (`ruby/`)
 
 1. **File → Open** → select `ruby/`.
 2. Open in Dev Container when prompted.
@@ -135,7 +135,7 @@ All commands assume you are in the implementation folder terminal **inside** the
 | Run sample CLI | see [reviewer guide](reviewer-guide.md#c--net--dotnet) | see [reviewer guide](reviewer-guide.md#typescript--nodejs-typescript) | see [reviewer guide](reviewer-guide.md#ruby--ruby) |
 | Lint / format | (via build) | `npm run lint` | `bundle exec rubocop` |
 
-Expected fixture output: **4** successful transfers; key balance **`1111234522226789: 4820.50`**. Full set: [Reviewer guide — expected outcome](reviewer-guide.md#expected-outcome).
+Expected fixture output: **4** successful transfers; key balance **`1111234522226789: 4820.50`**. Full set: [Reviewer guide: expected outcome](reviewer-guide.md#expected-outcome).
 
 ---
 
@@ -167,11 +167,11 @@ docker: Error response from daemon: the working directory 'C:/Program Files/Git/
 
 ### TypeScript: Node version errors locally
 
-The TypeScript stack requires **Node 22+**. If your host Node is older, use the Dev Container — Node 22 is already inside the image.
+The TypeScript stack requires **Node 22+**. If your host Node is older, use the Dev Container. Node 22 is already inside the image.
 
 ### Ruby: bundler / gem errors on the host
 
-If `bundle install` fails on Windows (SSL, paths), use the Dev Container or `./script/test-devcontainer.ps1` — gems install cleanly inside Linux.
+If `bundle install` fails on Windows (SSL, paths), use the Dev Container or `./script/test-devcontainer.ps1`. Gems install cleanly inside Linux.
 
 ### I only want to review, not develop
 
@@ -194,7 +194,7 @@ These Dev Containers are for **local development and review only**:
 - No database or message broker
 - No production deployment
 
-See [ADR 001 — no database in scope](decisions/001-no-database-or-event-sourcing.md).
+See [ADR 001: no database in scope](decisions/001-no-database-or-event-sourcing.md).
 
 ---
 

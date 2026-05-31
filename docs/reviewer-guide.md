@@ -14,9 +14,9 @@ Run from the **implementation folder** with the SDK installed locally (no Docker
 | TypeScript | `nodejs-typescript/` | `./demo.sh` |
 | Ruby | `ruby/` | `./demo.sh` |
 
-**TypeScript only** — full CI-style check (format, lint, coverage): `npm run verify`.
+**TypeScript only**: full CI-style check (format, lint, coverage): `npm run verify`.
 
-### C# / .NET — `dotnet/`
+### C# / .NET: `dotnet/`
 
 `./demo.sh` runs restore, build, test, and the fixture CLI.
 
@@ -25,7 +25,7 @@ cd dotnet
 ./demo.sh
 ```
 
-### TypeScript — `nodejs-typescript/`
+### TypeScript: `nodejs-typescript/`
 
 `./demo.sh` runs `npm ci`, test, build, and fixture CLI (`npm run demo`).
 
@@ -34,7 +34,7 @@ cd nodejs-typescript
 ./demo.sh
 ```
 
-### Ruby — `ruby/`
+### Ruby: `ruby/`
 
 `./demo.sh` runs `bundle install`, RSpec, RuboCop (if available), and the fixture CLI.
 
@@ -61,7 +61,7 @@ Run **`./demo.sh` inside the Dev Container image** without opening an IDE. Requi
 (cd ruby && ./script/test-devcontainer.sh)
 ```
 
-**Windows PowerShell** (Docker only — no local .NET / Node / Ruby SDK):
+**Windows PowerShell** (Docker only: no local .NET / Node / Ruby SDK):
 
 ```powershell
 cd dotnet; ./script/test-devcontainer.ps1
@@ -129,7 +129,7 @@ Replace `<balances.csv>` and `<transactions.csv>` with your file paths.
 
 ---
 
-### C# / .NET — `dotnet/`
+### C# / .NET: `dotnet/`
 
 **Syntax:** `dotnet run --project src/MableBank.Cli -- [--dry-run] <balances.csv> <transactions.csv>`
 
@@ -164,7 +164,7 @@ dotnet run --project src/MableBank.Cli -- \
 
 ---
 
-### TypeScript — `nodejs-typescript/`
+### TypeScript: `nodejs-typescript/`
 
 **Syntax:** `npm start -- [--dry-run] <balances.csv> <transactions.csv>` (dev, via tsx)  
 or `node dist/bin/mable-bank.js …` (after `npm run build`).
@@ -203,7 +203,7 @@ npm start -- test/fixtures/mable_account_balances.csv test/fixtures/mable_transa
 
 ---
 
-### Ruby — `ruby/`
+### Ruby: `ruby/`
 
 **Syntax:** `ruby bin/mable_bank [--dry-run] <balances.csv> <transactions.csv>`
 
@@ -298,9 +298,9 @@ Rubric: [challenge-rubric.md](challenge-rubric.md) · [ruby/README.md](../ruby/R
 
 ## Development environment and IDEs
 
-**Full walkthrough (plain English):** [devcontainers.md](devcontainers.md) — VS Code, Rider, WebStorm, RubyMine, smoke tests without an IDE, Windows troubleshooting.
+**Full walkthrough (plain English):** [devcontainers.md](devcontainers.md): VS Code, Rider, WebStorm, RubyMine, smoke tests without an IDE, Windows troubleshooting.
 
-Summary below. Containers are for **development and review only** — not production. No Docker Compose, database, or external services.
+Summary below. Containers are for **development and review only**, not production. No Docker Compose, database, or external services.
 
 ### Prerequisites
 
@@ -315,15 +315,15 @@ Summary below. Containers are for **development and review only** — not produc
 | TypeScript | `nodejs-typescript/` | **WebStorm** | `./demo.sh` |
 | Ruby | `ruby/` | **RubyMine** | `./demo.sh` |
 
-**Rider (`dotnet/`)** — Open `dotnet/` → Dev Container → terminal:
+**Rider (`dotnet/`)**: Open `dotnet/` → Dev Container → terminal:
 - `./demo.sh` (tests + fixture CLI)
 - Custom CSV: see [.NET CLI](#c--net--dotnet) above.
 
-**WebStorm (`nodejs-typescript/`)** — Open `nodejs-typescript/` → Dev Container → terminal:
+**WebStorm (`nodejs-typescript/`)**: Open `nodejs-typescript/` → Dev Container → terminal:
 - `./demo.sh` or `npm run verify` (full CI)
 - Custom CSV: see [TypeScript CLI](#typescript--nodejs-typescript) above.
 
-**RubyMine (`ruby/`)** — Open `ruby/` → Dev Container → terminal:
+**RubyMine (`ruby/`)**: Open `ruby/` → Dev Container → terminal:
 - `./demo.sh`
 - Custom CSV: see [Ruby CLI](#ruby--ruby) above.
 
@@ -363,8 +363,8 @@ Terminal Docker smoke-test: `./script/test-devcontainer.sh` in each implementati
 
 | Question | Answer |
 | --- | --- |
-| Why three implementations? | One model: .NET take-home, Ruby RSpec rubric, TS reference — [author-profile](author-profile.md#how-this-was-developed) |
-| Triple every feature in prod? | **No** — one stack per deliverable; three folders are for this submission only |
+| Why three implementations? | One model: .NET take-home, Ruby RSpec rubric, TS reference: [author-profile](author-profile.md#how-this-was-developed) |
+| Triple every feature in prod? | **No.** One stack per deliverable; three folders are for this submission only |
 | Transfer fails mid-file? | Later rows still process |
 | Duplicate transfer id in one run? | Skipped (`already_processed`, ADR 007) |
 | Dry-run? | `--dry-run` before the two CSV paths (all stacks) |

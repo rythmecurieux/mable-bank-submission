@@ -2,11 +2,11 @@
 
 Backend coding challenge: load company account balances from CSV, apply a day’s transfers, enforce non-negative balances.
 
-**Documentation:** [docs/README.md](docs/README.md) → [How this was built](docs/README.md#how-this-was-built) → [Reviewer guide](docs/reviewer-guide.md) → [Author profile](docs/author-profile.md).
+**Documentation:** [docs/README.md](docs/README.md) → [How the solution works](docs/README.md#how-the-solution-works) → [How this was built](docs/README.md#how-this-was-built) → [Reviewer guide](docs/reviewer-guide.md) → [Author profile](docs/author-profile.md).
 
 ## What went into this repo
 
-One **domain model** implemented three times for different review paths — not three products:
+One **domain model** implemented three times for different review paths, not three products:
 
 | Order | Folder | Why it exists | IDE (author) | Run the solution |
 | --- | --- | --- | --- | --- |
@@ -14,7 +14,7 @@ One **domain model** implemented three times for different review paths — not 
 | **2** | [`nodejs-typescript/`](nodejs-typescript/) | TypeScript reference, same fixtures | WebStorm | `cd nodejs-typescript && ./demo.sh` |
 | **3** | [`ruby/`](ruby/) | RSpec rubric alignment | RubyMine | `cd ruby && ./demo.sh` |
 
-Development was **domain-first**, then C# → Ruby → TypeScript, each in its own folder with a Dev Container for repeatable review. Deliberately **no** database, message bus, Docker Compose, or web API — see [docs/decisions/](docs/decisions/README.md).
+Development was **domain-first**, then C# → Ruby → TypeScript, each in its own folder with a Dev Container for repeatable review. Deliberately **no** database, message bus, Docker Compose, or web API. See [docs/decisions/](docs/decisions/README.md).
 
 Day to day: **one language per feature**. This repo is a **submission portfolio**, not a template to triple every ticket. Details: [docs/author-profile.md](docs/author-profile.md).
 
@@ -64,7 +64,8 @@ Full steps: [docs/devcontainers.md](docs/devcontainers.md).
 
 | Section | Entry |
 | --- | --- |
-| Index & build story | [docs/README.md](docs/README.md) |
+| How the solution works | [docs/README.md#how-the-solution-works](docs/README.md#how-the-solution-works) |
+| Build story | [docs/README.md#how-this-was-built](docs/README.md#how-this-was-built) |
 | Run all stacks | [docs/reviewer-guide.md](docs/reviewer-guide.md) |
 | Custom CSV + IDE/Dev Container CLI | [docs/reviewer-guide.md#run-the-cli-with-your-own-csv-files](docs/reviewer-guide.md#run-the-cli-with-your-own-csv-files) |
 | Author & scope | [docs/author-profile.md](docs/author-profile.md) |
