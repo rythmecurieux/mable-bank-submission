@@ -41,9 +41,9 @@ The Ruby image now installs gems at **build time** (not from the bind-mounted fo
 
 | Do this | Not this |
 | --- | --- |
-| `mabel/dotnet/` | `mabel/` |
-| `mabel/nodejs-typescript/` | `mabel/` |
-| `mabel/ruby/` | `mabel/` |
+| `mable/dotnet/` | `mable/` |
+| `mable/nodejs-typescript/` | `mable/` |
+| `mable/ruby/` | `mable/` |
 
 If you open the repo root, the Dev Container config will not be found.
 
@@ -198,7 +198,7 @@ Same root cause as Ruby: opening **`nodejs-typescript/`** alone hides `.git` at 
 
 **Symptom:** RubyMine shows `Failed to execute /usr/local/bin/git: fatal: not a git repository (or any parent up to mount point /workspaces)` during **Preparing environment** or **Uploading worker binary**, then **Cannot create Dev Container**. `bundle install` may still run in the background.
 
-**Cause:** You opened the **`ruby/`** folder. The `.git` directory lives in the **repo root** (`mabel-bank-submission/`), one level up. JetBrains Dev Containers mount only the opened folder by default, so Git is missing inside the container.
+**Cause:** You opened the **`ruby/`** folder. The `.git` directory lives in the **repo root** (`mable-bank-submission/`), one level up. JetBrains Dev Containers mount only the opened folder by default, so Git is missing inside the container.
 
 **Fix (rebuild):** Rebuild the Dev Container. The updated `devcontainer.json` mounts the parent repo at `/workspaces/repo-root` and sets the workspace to `/workspaces/repo-root/ruby`, so Git works.
 

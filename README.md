@@ -76,7 +76,7 @@ Full steps: [docs/devcontainers.md](docs/devcontainers.md).
 | Decisions | [docs/decisions/](docs/decisions/README.md) |
 
 ```text
-mabel/
+mable/
   docs/
   dotnet/               ← demo.sh
   nodejs-typescript/    ← demo.sh
